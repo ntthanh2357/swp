@@ -179,9 +179,9 @@ const Register: React.FC = () => {
                   <Mail className="h-8 w-8 text-blue-600" />
                 </div>
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Xác minh email của bạn</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Verify Your Email</h2>
               <p className="text-gray-600 mb-4">
-                Chúng tôi đã gửi mã xác minh 6 chữ số đến
+                We've sent a 6-digit verification code to
               </p>
               <p className="font-medium text-gray-900 mb-6">{pendingVerification}</p>
             </div>
@@ -195,7 +195,7 @@ const Register: React.FC = () => {
 
               <div>
                 <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-2">
-                  Mã xác minh
+                  Verification Code
                 </label>
                 <input
                   id="otp"
@@ -205,7 +205,7 @@ const Register: React.FC = () => {
                   maxLength={6}
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                  placeholder="Nhập mã 6 chữ số"
+                  placeholder="Enter 6-digit code"
                   className="block w-full px-4 py-3 text-center text-2xl font-mono border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 tracking-widest"
                 />
               </div>
@@ -215,11 +215,11 @@ const Register: React.FC = () => {
                 disabled={loading || otp.length !== 6}
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {loading ? 'Đang xác minh...' : 'Xác minh email'}
+                {loading ? 'Verifying...' : 'Verify Email'}
               </button>
 
               <div className="text-center">
-                <p className="text-sm text-gray-600 mb-2">Không nhận được mã?</p>
+                <p className="text-sm text-gray-600 mb-2">Didn't receive the code?</p>
                 <button
                   type="button"
                   onClick={handleResendOTP}
@@ -229,10 +229,10 @@ const Register: React.FC = () => {
                   {otpTimer > 0 ? (
                     <span className="flex items-center justify-center">
                       <Clock className="h-4 w-4 mr-1" />
-                      Gửi lại sau {otpTimer}s
+                      Resend in {otpTimer}s
                     </span>
                   ) : (
-                    'Gửi lại mã'
+                    'Resend Code'
                   )}
                 </button>
               </div>
@@ -247,7 +247,7 @@ const Register: React.FC = () => {
                 }}
                 className="text-gray-600 hover:text-gray-800 text-sm"
               >
-                ← Quay lại đăng ký
+                ← Back to registration
               </button>
             </div>
           </div>
@@ -264,8 +264,8 @@ const Register: React.FC = () => {
             <div className="flex items-center justify-center mb-4">
               <GraduationCap className="h-12 w-12 text-blue-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Tham gia ScholarConnect</h2>
-            <p className="text-gray-600">Tạo tài khoản của bạn để bắt đầu</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Join ScholarConnect</h2>
+            <p className="text-gray-600">Create your account to get started</p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -277,7 +277,7 @@ const Register: React.FC = () => {
 
             <div>
               <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                Tôi là
+                I am a
               </label>
               <select
                 id="role"
@@ -286,14 +286,14 @@ const Register: React.FC = () => {
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="student">Học sinh</option>
-                <option value="advisor">Cố vấn</option>
+                <option value="student">Student</option>
+                <option value="advisor">Advisor</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Họ và tên
+                Full Name
               </label>
               <input
                 id="name"
@@ -302,14 +302,14 @@ const Register: React.FC = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Nhập họ và tên của bạn"
+                placeholder="Enter your full name"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Địa chỉ email
+                Email Address
               </label>
               <input
                 id="email"
@@ -318,7 +318,7 @@ const Register: React.FC = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Nhập email của bạn"
+                placeholder="Enter your email"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -327,7 +327,7 @@ const Register: React.FC = () => {
               <>
                 <div>
                   <label htmlFor="fieldOfStudy" className="block text-sm font-medium text-gray-700">
-                    Lĩnh vực học tập
+                    Field of Study
                   </label>
                   <input
                     id="fieldOfStudy"
@@ -335,14 +335,14 @@ const Register: React.FC = () => {
                     type="text"
                     value={formData.fieldOfStudy}
                     onChange={handleChange}
-                    placeholder="Ví dụ: Khoa học máy tính, Kỹ thuật"
+                    placeholder="e.g., Computer Science, Engineering"
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="targetCountry" className="block text-sm font-medium text-gray-700">
-                    Quốc gia mục tiêu
+                    Target Country
                   </label>
                   <input
                     id="targetCountry"
@@ -350,7 +350,7 @@ const Register: React.FC = () => {
                     type="text"
                     value={formData.targetCountry}
                     onChange={handleChange}
-                    placeholder="Ví dụ: Mỹ, Canada, Anh"
+                    placeholder="e.g., USA, Canada, UK"
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -361,7 +361,7 @@ const Register: React.FC = () => {
               <>
                 <div>
                   <label htmlFor="experience" className="block text-sm font-medium text-gray-700">
-                    Kinh nghiệm
+                    Experience
                   </label>
                   <textarea
                     id="experience"
@@ -369,14 +369,14 @@ const Register: React.FC = () => {
                     rows={3}
                     value={formData.experience}
                     onChange={handleChange}
-                    placeholder="Mô tả kinh nghiệm tư vấn học thuật của bạn"
+                    placeholder="Describe your academic consulting experience"
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="specializations" className="block text-sm font-medium text-gray-700">
-                    Chuyên môn
+                    Specializations
                   </label>
                   <input
                     id="specializations"
@@ -384,7 +384,7 @@ const Register: React.FC = () => {
                     type="text"
                     value={formData.specializations}
                     onChange={handleChange}
-                    placeholder="Ví dụ: STEM, Kinh doanh, Nghệ thuật (cách nhau bằng dấu phẩy)"
+                    placeholder="e.g., STEM, Business, Arts (comma separated)"
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -393,7 +393,7 @@ const Register: React.FC = () => {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Mật khẩu
+                Password
               </label>
               <div className="mt-1 relative">
                 <input
@@ -403,7 +403,7 @@ const Register: React.FC = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Tạo mật khẩu"
+                  placeholder="Create a password"
                   className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
                 <button
@@ -422,7 +422,7 @@ const Register: React.FC = () => {
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Xác nhận mật khẩu
+                Confirm Password
               </label>
               <div className="mt-1 relative">
                 <input
@@ -432,7 +432,7 @@ const Register: React.FC = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder="Xác nhận mật khẩu của bạn"
+                  placeholder="Confirm your password"
                   className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
                 <button
@@ -454,7 +454,7 @@ const Register: React.FC = () => {
               disabled={loading}
               className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? 'Đang tạo tài khoản...' : 'Tạo tài khoản'}
+              {loading ? 'Creating account...' : 'Create Account'}
             </button>
 
 
@@ -463,7 +463,7 @@ const Register: React.FC = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Hoặc tiếp tục với</span>
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
               </div>
             </div>
 
@@ -482,12 +482,12 @@ const Register: React.FC = () => {
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
               </div>
-              <span className="font-medium">Đăng ký với Google</span>
+              <span className="font-medium">Sign up with Google</span>
             </button>
             <div className="text-center">
-              <span className="text-gray-600">Đã có tài khoản? </span>
+              <span className="text-gray-600">Already have an account? </span>
               <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
-                Đăng nhập
+                Sign in
               </Link>
             </div>
           </form>
