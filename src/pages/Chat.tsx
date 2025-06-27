@@ -523,9 +523,19 @@ const Chat: React.FC = () => {
   };
 
   const handleMessagesRead = (data: any) => {
-    setMessages(prev => prev.map(msg => 
-      msg.receiverId === data.userId ? { ...msg, read: true } : msg
-    ));
+    if (selectedChat) {
+      setAllMessages(prev => ({
+        ...prev,
+        [selectedChat]: (prev[selectedChat] || []).map(msg => 
+          msg.receiverId === data.userId ? { ...msg, read: true } : msg
+        )
+      }));
+    }
+        [selectedChat]: (prev[selectedChat] || []).map(msg => 
+          msg.receiverId === data.userId ? { ...msg, read: true } : msg
+        )
+      }));
+    }
   };
 
   const getOtherParticipant = (chatRoom: ChatRoom) => {
@@ -662,16 +672,35 @@ const Chat: React.FC = () => {
   };
 
   const handleEditMessage = (messageId: string, newContent: string) => {
-    setMessages(prev => prev.map(msg => 
-      msg.id === messageId 
-        ? { ...msg, content: newContent, edited: true, editedAt: new Date() }
-        : msg
-    ));
+    if (selectedChat) {
+      setAllMessages(prev => ({
+        ...prev,
+        [selectedChat]: (prev[selectedChat] || []).map(msg => 
+          msg.id === messageId 
+            ? { ...msg, content: newContent, edited: true, editedAt: new Date() }
+            : msg
+        )
+      }));
+    }
+            : msg
+        )
+      }));
+    }
     setEditingMessage(null);
   };
 
   const handleDeleteMessage = (messageId: string) => {
-    setMessages(prev => prev.filter(msg => msg.id !== messageId));
+    if (selectedChat) {
+      setAllMessages(prev => ({
+        ...prev,
+        [selectedChat]: (prev[selectedChat] || []).filter(msg => msg.id !== messageId)
+      }));
+    }
+      setAllMessages(prev => ({
+        ...prev,
+        [selectedChat]: (prev[selectedChat] || []).filter(msg => msg.id !== messageId)
+      }));
+    }
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -689,7 +718,17 @@ const Chat: React.FC = () => {
         read: false,
       };
 
-      setMessages(prev => [...prev, newMessage]);
+      if (selectedChat) {
+        setAllMessages(prev => ({
+          ...prev,
+          [selectedChat]: [...(prev[selectedChat] || []), newMessage]
+        }));
+      }
+        setAllMessages(prev => ({
+          ...prev,
+          [selectedChat]: [...(prev[selectedChat] || []), newMessage]
+        }));
+      }
       
       socketService.emit('send_message', {
         chatRoomId: selectedChat,
