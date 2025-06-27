@@ -531,11 +531,6 @@ const Chat: React.FC = () => {
         )
       }));
     }
-        [selectedChat]: (prev[selectedChat] || []).map(msg => 
-          msg.receiverId === data.userId ? { ...msg, read: true } : msg
-        )
-      }));
-    }
   };
 
   const getOtherParticipant = (chatRoom: ChatRoom) => {
