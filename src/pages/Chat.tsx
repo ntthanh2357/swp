@@ -677,20 +677,11 @@ const Chat: React.FC = () => {
         )
       }));
     }
-            : msg
-        )
-      }));
-    }
     setEditingMessage(null);
   };
 
   const handleDeleteMessage = (messageId: string) => {
     if (selectedChat) {
-      setAllMessages(prev => ({
-        ...prev,
-        [selectedChat]: (prev[selectedChat] || []).filter(msg => msg.id !== messageId)
-      }));
-    }
       setAllMessages(prev => ({
         ...prev,
         [selectedChat]: (prev[selectedChat] || []).filter(msg => msg.id !== messageId)
