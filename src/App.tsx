@@ -16,6 +16,7 @@ import Advisors from './pages/Advisors';
 import AdvisorProfile from './pages/AdvisorProfile';
 import ConsultingPackages from './pages/ConsultingPackages';
 import OrderHistory from './pages/OrderHistory';
+import AdvisorProfileSetup from './pages/AdvisorProfileSetup';
 import StudentDashboard from './pages/StudentDashboard';
 import AdvisorDashboard from './pages/AdvisorDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -46,6 +47,7 @@ function App() {
               <Route path="/advisor-dashboard" element={<AdvisorDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/advisor-scholarships" element={<AdvisorScholarships />} />
+              <Route path="/advisor-profile-setup" element={<AdvisorProfileSetup />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/library" element={<Library />} />
