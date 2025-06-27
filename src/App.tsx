@@ -23,7 +23,6 @@ import AdvisorDashboard from './pages/AdvisorDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AdvisorScholarships from './pages/AdvisorScholarships';
 import Profile from './pages/Profile';
-import CreateScholarship from './pages/CreateScholarship';
 import Chat from './pages/Chat';
 import Library from './pages/Library';
 import About from './pages/About';
