@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, MessageCircle, Users, TrendingUp, Clock, Star, Edit, Save, X, Award } from 'lucide-react';
+import { Calendar, MessageCircle, Users, TrendingUp, Clock, Star, Edit, Save, X, Award, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Advisor } from '../types';
@@ -153,13 +153,6 @@ const AdvisorDashboard: React.FC = () => {
                 <h2 className="text-xl font-semibold text-gray-900">Profile Management</h2>
                 {!isEditingProfile ? (
                   <>
-                    <Link
-                      to="/create-scholarship"
-                      className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
-                    >
-                      <Plus className="h-4 w-4" />
-                      <span className="hidden sm:inline">Create Scholarship</span>
-                    </Link>
                     <Link
                       to="/advisor-scholarships"
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"

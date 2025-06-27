@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2, Eye, Search, Filter, Award, Calendar, DollarSign, Globe, Book, CheckCircle, Clock, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Scholarship } from '../types';
 

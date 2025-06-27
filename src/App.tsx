@@ -8,6 +8,7 @@ import Footer from './components/Layout/Footer';
 
 // Pages
 import Home from './pages/Home';
+import CreateScholarship from './pages/CreateScholarship';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Scholarships from './pages/Scholarships';
