@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Users, Award, TrendingUp, AlertCircle, Check, X, Eye, Search, Filter, Settings, MessageCircle, DollarSign, Calendar, BarChart3, Shield, Bell, Edit, Trash2, Plus, Download, RefreshCw } from 'lucide-react';
+import { Users, Award, TrendingUp, AlertTriangle, CheckCircle, Clock, Settings, Eye, Edit, Trash2, Search, Filter, MoreVertical, Plus } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
