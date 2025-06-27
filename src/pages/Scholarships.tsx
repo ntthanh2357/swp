@@ -454,7 +454,7 @@ const Scholarships: React.FC = () => {
                 {scholarship.featured && (
                   <div className="absolute top-4 left-4 z-10">
                     <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                      ⭐ NỔI BẬT
+                      ⭐ FEATURED
                     </div>
                   </div>
                 )}
@@ -468,7 +468,7 @@ const Scholarships: React.FC = () => {
                         ? 'bg-red-500/20 text-red-600 hover:bg-red-500/30' 
                         : 'bg-white/20 text-gray-600 hover:bg-white/40 hover:text-red-500'
                     }`}
-                    title={isSaved ? 'Bỏ lưu' : 'Lưu học bổng'}
+                    title={isSaved ? 'Remove from saved' : 'Save scholarship'}
                   >
                     <Heart className={`h-5 w-5 ${isSaved ? 'fill-current' : ''}`} />
                   </button>
@@ -515,10 +515,10 @@ const Scholarships: React.FC = () => {
                     }`}>
                       <Calendar className="h-4 w-4 mr-2" />
                       {isExpired ? (
-                        'Đã hết hạn'
+                        'Expired'
                       ) : (
                         <>
-                          {isUrgent ? `Còn ${daysLeft} ngày` : `Hạn: ${scholarship.deadline.toLocaleDateString()}`}
+                          {isUrgent ? `${daysLeft} days left` : `Due: ${scholarship.deadline.toLocaleDateString()}`}
                         </>
                       )}
                     </div>
@@ -529,14 +529,14 @@ const Scholarships: React.FC = () => {
                     <div className="bg-gray-50 rounded-lg p-3">
                       <div className="flex items-center text-sm text-gray-700 mb-1">
                         <Book className="h-4 w-4 mr-2 text-blue-500" />
-                        <span className="font-medium">Lĩnh vực:</span>
+                        <span className="font-medium">Field:</span>
                       </div>
                       <div className="text-sm text-gray-600 truncate pl-6">{scholarship.fieldOfStudy.join(', ')}</div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3">
                       <div className="flex items-center text-sm text-gray-700 mb-1">
                         <GraduationCap className="h-4 w-4 mr-2 text-green-500" />
-                        <span className="font-medium">Bậc học:</span>
+                        <span className="font-medium">Level:</span>
                       </div>
                       <div className="text-sm text-gray-600 pl-6">{scholarship.academicLevel.join(', ')}</div>
                     </div>
@@ -570,15 +570,15 @@ const Scholarships: React.FC = () => {
                       to={`/scholarships/${scholarship.id}`}
                       className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105"
                     >
-                      Xem chi tiết
+                      View Details
                     </Link>
                     {!isExpired && user && (
                       <button
                         className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center space-x-2"
-                        title="Ứng tuyển học bổng"
+                        title="Apply for scholarship"
                       >
                         <FileText className="h-4 w-4" />
-                        <span>Ứng tuyển</span>
+                        <span>Apply</span>
                       </button>
                     )}
                   </div>
@@ -599,7 +599,7 @@ const Scholarships: React.FC = () => {
               disabled={currentPage === 1}
               className="px-6 py-3 border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors font-medium"
             >
-              Trước
+             Previous
             </button>
             
             {[...Array(totalPages)].map((_, index) => {
@@ -624,7 +624,7 @@ const Scholarships: React.FC = () => {
               disabled={currentPage === totalPages}
               className="px-6 py-3 border border-gray-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors font-medium"
             >
-              Tiếp
+             Next
             </button>
           </div>
         )}
@@ -635,8 +635,8 @@ const Scholarships: React.FC = () => {
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Filter className="h-12 w-12 text-gray-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy học bổng</h3>
-            <p className="text-gray-600 mb-6 max-w-md mx-auto">Hãy thử điều chỉnh tiêu chí tìm kiếm để tìm thêm các học bổng phù hợp.</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">No scholarships found</h3>
+            <p className="text-gray-600 mb-6 max-w-md mx-auto">Try adjusting your search criteria to find more scholarships that match your needs.</p>
             <button
               onClick={() => {
                 setSearchQuery('');
@@ -646,7 +646,7 @@ const Scholarships: React.FC = () => {
               }}
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              Xóa tất cả bộ lọc
+              Clear All Filters
             </button>
           </div>
         )}

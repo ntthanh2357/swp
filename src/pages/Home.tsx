@@ -260,14 +260,14 @@ const Home: React.FC = () => {
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Cổng kết nối đến
+                Your Gateway to
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 animate-pulse">
-                  Sự xuất sắc học thuật
+                  Academic Excellence
                 </span>
               </h1>
               
               <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl">
-                Kết nối với các chuyên gia tư vấn, khám phá cơ hội học bổng và thúc đẩy hành trình học thuật của bạn với sự hướng dẫn cá nhân hóa bằng AI.
+                Connect with expert advisors, discover scholarship opportunities, and accelerate your academic journey with AI-powered personalized guidance.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
@@ -275,14 +275,14 @@ const Home: React.FC = () => {
                   to="/register"
                   className="group bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center space-x-2 transform hover:scale-105 shadow-lg"
                 >
-                  <span>Bắt đầu hành trình</span>
+                  <span>Start Your Journey</span>
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/login"
                   className="group border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
-                  <span>Đăng nhập</span>
+                  <span>Sign In</span>
                 </Link>
               </div>
 
@@ -290,15 +290,15 @@ const Home: React.FC = () => {
               <div className="flex items-center justify-center lg:justify-start space-x-6 text-blue-200">
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 mr-2 text-green-400" />
-                  <span className="text-sm">Cố vấn đã xác minh</span>
+                  <span className="text-sm">Verified Advisors</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 mr-2 text-green-400" />
-                  <span className="text-sm">Nền tảng an toàn</span>
+                  <span className="text-sm">Secure Platform</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-5 w-5 mr-2 text-green-400" />
-                  <span className="text-sm">Hỗ trợ 24/7</span>
+                  <span className="text-sm">24/7 Support</span>
                 </div>
               </div>
             </div>
@@ -307,8 +307,8 @@ const Home: React.FC = () => {
             <div className="relative">
               <div className="relative z-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
                 <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2">Các trường đại học hàng đầu</h3>
-                  <p className="text-blue-200">Nơi các học sinh của chúng tôi theo học</p>
+                  <h3 className="text-2xl font-bold mb-2">Top Universities</h3>
+                  <p className="text-blue-200">Where our students study</p>
                 </div>
                 
                 <div className="relative h-64 rounded-xl overflow-hidden mb-4">
@@ -329,7 +329,7 @@ const Home: React.FC = () => {
                       </div>
                       <div className="text-center">
                         <div className="text-lg font-bold">{universities[currentUniversity].scholarships}</div>
-                        <div className="text-xs opacity-90">Học bổng</div>
+                        <div className="text-xs opacity-90">Scholarships</div>
                       </div>
                     </div>
                   </div>
@@ -377,10 +377,10 @@ const Home: React.FC = () => {
                    animatedStats.countries}{stat.suffix}
                 </div>
                 <div className="text-gray-600 font-medium">
-                  {index === 0 ? 'Học sinh được hỗ trợ' :
-                   index === 1 ? 'Chuyên gia tư vấn' :
-                   index === 2 ? 'Tỷ lệ thành công' :
-                   'Quốc gia'}
+                  {index === 0 ? 'Students Helped' :
+                   index === 1 ? 'Expert Advisors' :
+                   index === 2 ? 'Success Rate' :
+                   'Countries'}
                 </div>
               </div>
             ))}
@@ -393,10 +393,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Học tại các trường đại học tốt nhất thế giới
+              Study at the World's Best Universities
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Học sinh của chúng tôi đã được nhận vào các trường đại học danh tiếng trên toàn thế giới với học bổng toàn phần.
+              Our students have been accepted to prestigious universities worldwide with full scholarships.
             </p>
           </div>
           
@@ -433,11 +433,11 @@ const Home: React.FC = () => {
                     <div className="flex items-center space-x-2">
                       <Award className="h-5 w-5 text-blue-600" />
                       <span className="text-sm font-medium text-gray-700">
-                        {university.scholarships} Học bổng
+                        {university.scholarships} Scholarships
                       </span>
                     </div>
                     <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                      Tìm hiểu thêm →
+                      Learn More →
                     </button>
                   </div>
                 </div>
@@ -450,19 +450,19 @@ const Home: React.FC = () => {
             <div className="grid md:grid-cols-4 gap-8 text-center">
               <div>
                 <div className="text-3xl font-bold text-blue-600 mb-2">150+</div>
-                <div className="text-gray-600">Trường đại học đối tác</div>
+                <div className="text-gray-600">Partner Universities</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-green-600 mb-2">$50M+</div>
-                <div className="text-gray-600">Học bổng đã đạt được</div>
+                <div className="text-gray-600">Scholarships Secured</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-purple-600 mb-2">45</div>
-                <div className="text-gray-600">Quốc gia</div>
+                <div className="text-gray-600">Countries</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
-                <div className="text-gray-600">Tỷ lệ chấp nhận</div>
+                <div className="text-gray-600">Acceptance Rate</div>
               </div>
             </div>
           </div>
@@ -474,10 +474,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Tất cả những gì bạn cần để thành công
+              Everything You Need to Succeed
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Nền tảng toàn diện của chúng tôi cung cấp tất cả các công cụ và hỗ trợ bạn cần để tìm kiếm và đảm bảo học bổng.
+              Our comprehensive platform provides all the tools and support you need to find and secure scholarships.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -492,17 +492,17 @@ const Home: React.FC = () => {
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {index === 0 ? 'Khám phá học bổng' :
-                     index === 1 ? 'Chuyên gia tư vấn' :
-                     'Hỗ trợ thời gian thực'}
+                    {index === 0 ? 'Scholarship Discovery' :
+                     index === 1 ? 'Expert Advisors' :
+                     'Real-time Support'}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    {index === 0 ? 'Truy cập hàng nghìn cơ hội học bổng trên toàn thế giới với các đề xuất được cá nhân hóa bằng AI.' :
-                     index === 1 ? 'Kết nối với các cố vấn có kinh nghiệm chuyên về lĩnh vực và quốc gia mục tiêu của bạn.' :
-                     'Nhận hỗ trợ ngay lập tức thông qua chat và tư vấn video với các cố vấn đáng tin cậy.'}
+                    {index === 0 ? 'Access thousands of scholarship opportunities worldwide with AI-powered personalized recommendations.' :
+                     index === 1 ? 'Connect with experienced advisors who specialize in your field and target countries.' :
+                     'Get immediate assistance through chat and video consultations with trusted advisors.'}
                   </p>
                   <div className="mt-4 flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-sm font-medium">Tìm hiểu thêm</span>
+                    <span className="text-sm font-medium">Learn More</span>
                     <ChevronRight className="h-4 w-4 ml-1" />
                   </div>
                 </div>
@@ -517,7 +517,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-6">
             <Zap className="h-6 w-6 text-yellow-400 mr-2" />
-            <h3 className="text-xl font-semibold">Cơ hội học bổng mới nhất</h3>
+            <h3 className="text-xl font-semibold">Latest Scholarship Opportunities</h3>
           </div>
           <div className="flex space-x-8 animate-scroll">
             {[...recentScholarships, ...recentScholarships].map((scholarship, index) => (
@@ -529,7 +529,7 @@ const Home: React.FC = () => {
                 <p className="text-blue-200 text-sm">{scholarship.university}</p>
                 <div className="flex items-center justify-between mt-2 text-xs">
                   <span className="bg-blue-500 px-2 py-1 rounded">{scholarship.type}</span>
-                  <span>Hạn nộp: {scholarship.deadline}</span>
+                  <span>Deadline: {scholarship.deadline}</span>
                 </div>
               </div>
             ))}
@@ -542,10 +542,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Câu chuyện thành công
+              Success Stories
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Lắng nghe từ những học sinh đã đạt được ước mơ với ScholarConnect
+              Hear from students who achieved their dreams with ScholarConnect
             </p>
           </div>
           
@@ -596,10 +596,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Gặp gỡ các cố vấn hàng đầu
+              Meet Our Top Advisors
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Làm việc với các chuyên gia có kinh nghiệm đã giúp hàng nghìn học sinh đạt được mục tiêu học thuật.
+              Work with experienced experts who have helped thousands of students achieve their academic goals.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -639,7 +639,7 @@ const Home: React.FC = () => {
               to="/advisors"
               className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center space-x-2 transform hover:scale-105"
             >
-              <span>Xem tất cả cố vấn</span>
+              <span>View All Advisors</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
@@ -651,39 +651,39 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Cách hoạt động
+              How It Works
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Bắt đầu chỉ với vài bước đơn giản và bắt đầu hành trình đến thành công học thuật.
+              Get started with just a few simple steps and begin your journey to academic success.
             </p>
           </div>
           <div className="grid md:grid-cols-4 gap-8">
             {[
               {
                 step: '01',
-                title: 'Tạo hồ sơ',
-                description: 'Cho chúng tôi biết về mục tiêu và sở thích học thuật của bạn',
+                title: 'Create Profile',
+                description: 'Tell us about your academic goals and preferences',
                 icon: <Users className="h-8 w-8" />,
                 color: 'blue'
               },
               {
                 step: '02',
-                title: 'Tìm cố vấn',
-                description: 'Duyệt và kết nối với các cố vấn chuyên gia trong lĩnh vực của bạn',
+                title: 'Find Advisors',
+                description: 'Browse and connect with expert advisors in your field',
                 icon: <Globe className="h-8 w-8" />,
                 color: 'purple'
               },
               {
                 step: '03',
-                title: 'Đặt phiên',
-                description: 'Lên lịch tư vấn và chọn gói phù hợp',
+                title: 'Book Sessions',
+                description: 'Schedule consultations and choose the right package',
                 icon: <Clock className="h-8 w-8" />,
                 color: 'green'
               },
               {
                 step: '04',
-                title: 'Nhận hướng dẫn',
-                description: 'Nhận lời khuyên cá nhân hóa và cơ hội học bổng',
+                title: 'Get Guidance',
+                description: 'Receive personalized advice and scholarship opportunities',
                 icon: <Award className="h-8 w-8" />,
                 color: 'orange'
               },
@@ -720,17 +720,17 @@ const Home: React.FC = () => {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Sẵn sàng bắt đầu hành trình học thuật của bạn?
+            Ready to Start Your Academic Journey?
           </h2>
           <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-            Tham gia cùng hàng nghìn học sinh đã tìm thấy con đường thành công với ScholarConnect.
+            Join thousands of students who found their path to success with ScholarConnect.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/register"
               className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 inline-flex items-center justify-center space-x-2 transform hover:scale-105 shadow-lg"
             >
-              <span>Bắt đầu hôm nay</span>
+              <span>Start Today</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
             <Link
@@ -738,7 +738,7 @@ const Home: React.FC = () => {
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 inline-flex items-center justify-center space-x-2"
             >
               <BookOpen className="h-5 w-5" />
-              <span>Duyệt học bổng</span>
+              <span>Browse Scholarships</span>
             </Link>
           </div>
         </div>

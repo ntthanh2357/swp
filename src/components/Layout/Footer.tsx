@@ -12,8 +12,8 @@ const Footer: React.FC = () => {
               <span className="text-xl font-bold">ScholarConnect</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Kết nối học sinh với các cơ hội học bổng và chuyên gia tư vấn trên toàn thế giới. 
-              Hành trình đến với sự xuất sắc học thuật bắt đầu từ đây.
+              Connecting students with scholarship opportunities and expert advisors worldwide. 
+              Your journey to academic excellence starts here.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
@@ -29,28 +29,28 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Dành cho học sinh</h3>
+            <h3 className="text-lg font-semibold mb-4">For Students</h3>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Tìm học bổng</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Duyệt cố vấn</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Câu chuyện thành công</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Mẹo ứng tuyển</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Find Scholarships</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Browse Advisors</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Success Stories</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Application Tips</a></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Dành cho cố vấn</h3>
+            <h3 className="text-lg font-semibold mb-4">For Advisors</h3>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Trở thành cố vấn</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Tài nguyên cố vấn</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Cộng đồng</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Hỗ trợ</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Become an Advisor</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Advisor Resources</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 ScholarConnect. Tất cả quyền được bảo lưu.</p>
+          <p>&copy; 2024 ScholarConnect. All rights reserved.</p>
         </div>
       </div>
     </footer>

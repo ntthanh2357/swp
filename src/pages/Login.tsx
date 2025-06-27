@@ -80,13 +80,14 @@ const Login: React.FC = () => {
               <GraduationCap className="h-12 w-12 text-blue-600" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Chào mừng trở lại</h2>
-            <p className="text-gray-600">Đăng nhập vào tài khoản ScholarConnect của bạn</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+            <p className="text-gray-600">Sign in to your ScholarConnect account</p>
             
             {showPendingMessage && (
               <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-yellow-800 text-sm">
-                  <strong>Đăng ký thành công!</strong> Tài khoản cố vấn của bạn đang chờ phê duyệt. 
-                  Bạn sẽ được thông báo khi quản trị viên xem xét đơn đăng ký của bạn.
+                  <strong>Registration Successful!</strong> Your advisor account is pending approval. 
+                  You will be notified when an admin reviews your application.
                 </p>
               </div>
             )}
@@ -101,7 +102,7 @@ const Login: React.FC = () => {
 
             <div>
               <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                Tôi là
+                I am a
               </label>
               <select
                 id="role"
@@ -110,15 +111,15 @@ const Login: React.FC = () => {
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="student">Học sinh</option>
-                <option value="advisor">Cố vấn</option>
-                <option value="admin">Quản trị viên</option>
+                <option value="student">Student</option>
+                <option value="advisor">Advisor</option>
+                <option value="admin">Administrator</option>
               </select>
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Địa chỉ email
+                Email Address
               </label>
               <input
                 id="email"
@@ -127,14 +128,14 @@ const Login: React.FC = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Nhập email của bạn"
+                placeholder="Enter your email"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Mật khẩu
+                Password
               </label>
               <div className="mt-1 relative">
                 <input
@@ -144,7 +145,7 @@ const Login: React.FC = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Nhập mật khẩu của bạn"
+                  placeholder="Enter your password"
                   className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
                 <button
@@ -164,7 +165,7 @@ const Login: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="text-sm">
                 <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
-                  Quên mật khẩu?
+                  Forgot password?
                 </a>
               </div>
             </div>
@@ -174,7 +175,7 @@ const Login: React.FC = () => {
               disabled={loading}
               className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
 
 
@@ -183,7 +184,7 @@ const Login: React.FC = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Hoặc tiếp tục với</span>
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
               </div>
             </div>
 
@@ -202,23 +203,23 @@ const Login: React.FC = () => {
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
               </div>
-              <span className="font-medium">Tiếp tục với Google</span>
+              <span className="font-medium">Continue with Google</span>
             </button>
             <div className="text-center">
-              <span className="text-gray-600">Chưa có tài khoản? </span>
+              <span className="text-gray-600">Don't have an account? </span>
               <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-                Đăng ký
+                Sign up
               </Link>
             </div>
           </form>
 
           {/* Demo Credentials */}
           <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm font-medium text-gray-700 mb-2">Thông tin đăng nhập demo:</p>
+            <p className="text-sm font-medium text-gray-700 mb-2">Demo login credentials:</p>
             <div className="text-xs text-gray-600 space-y-1">
-              <div>Học sinh: student@example.com</div>
-              <div>Cố vấn: advisor@example.com</div>
-              <div>Mật khẩu: bất kỳ mật khẩu nào</div>
+              <div>Student: student@example.com</div>
+              <div>Advisor: advisor@example.com</div>
+              <div>Password: any password</div>
             </div>
           </div>
         </div>

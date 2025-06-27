@@ -25,16 +25,16 @@ const Header: React.FC = () => {
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link to="/scholarships" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Học bổng
+              Scholarships
             </Link>
             <Link to="/advisors" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Tìm cố vấn
+              Find Advisors
             </Link>
             <Link to="/packages" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Gói tư vấn
+              Consulting Packages
             </Link>
             <Link to="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Về chúng tôi
+              About Us
             </Link>
           </nav>
 
@@ -48,21 +48,21 @@ const Header: React.FC = () => {
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <User className="h-4 w-4" />
-                      <span className="hidden sm:inline">Bảng điều khiển</span>
+                      <span className="hidden sm:inline">Dashboard</span>
                     </Link>
                     <Link
                       to="/orders"
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <ShoppingBag className="h-4 w-4" />
-                      <span className="hidden sm:inline">Đơn hàng</span>
+                      <span className="hidden sm:inline">Orders</span>
                     </Link>
                     <Link
                       to="/chat"
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <MessageCircle className="h-4 w-4" />
-                      <span className="hidden sm:inline">Tin nhắn</span>
+                      <span className="hidden sm:inline">Messages</span>
                     </Link>
                   </>
                 )}
@@ -73,14 +73,14 @@ const Header: React.FC = () => {
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <Calendar className="h-4 w-4" />
-                      <span className="hidden sm:inline">Bảng điều khiển</span>
+                      <span className="hidden sm:inline">Dashboard</span>
                     </Link>
                     <Link
                       to="/chat"
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <MessageCircle className="h-4 w-4" />
-                      <span className="hidden sm:inline">Tin nhắn</span>
+                      <span className="hidden sm:inline">Messages</span>
                     </Link>
                   </>
                 )}
@@ -91,14 +91,14 @@ const Header: React.FC = () => {
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <Settings className="h-4 w-4" />
-                      <span className="hidden sm:inline">Quản trị</span>
+                      <span className="hidden sm:inline">Admin</span>
                     </Link>
                     <Link
                       to="/chat"
                       className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
                     >
                       <MessageCircle className="h-4 w-4" />
-                      <span className="hidden sm:inline">Tin nhắn</span>
+                      <span className="hidden sm:inline">Messages</span>
                     </Link>
                   </>
                 )}
@@ -133,7 +133,7 @@ const Header: React.FC = () => {
                         className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                       >
                         <User className="h-4 w-4" />
-                        <span>Hồ sơ cá nhân</span>
+                       <span>Profile</span>
                       </Link>
                       <Link
                         to="/settings"
@@ -141,7 +141,7 @@ const Header: React.FC = () => {
                         className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                       >
                         <Settings className="h-4 w-4" />
-                        <span>Cài đặt</span>
+                       <span>Settings</span>
                       </Link>
                       <hr className="my-2" />
                       <button
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
                         className="flex items-center space-x-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors w-full text-left"
                       >
                         <LogOut className="h-4 w-4" />
-                        <span>Đăng xuất</span>
+                       <span>Sign Out</span>
                       </button>
                     </div>
                   )}
@@ -172,13 +172,13 @@ const Header: React.FC = () => {
                   to="/login"
                   className="text-gray-700 hover:text-blue-600 transition-colors"
                 >
-                  Đăng nhập
+                  Sign In
                 </Link>
                 <Link
                   to="/register"
                   className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Bắt đầu
+                  Get Started
                 </Link>
               </div>
             )}
