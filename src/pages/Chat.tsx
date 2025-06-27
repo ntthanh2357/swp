@@ -710,11 +710,6 @@ const Chat: React.FC = () => {
           [selectedChat]: [...(prev[selectedChat] || []), newMessage]
         }));
       }
-        setAllMessages(prev => ({
-          ...prev,
-          [selectedChat]: [...(prev[selectedChat] || []), newMessage]
-        }));
-      }
       
       socketService.emit('send_message', {
         chatRoomId: selectedChat,
