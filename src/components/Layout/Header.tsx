@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GraduationCap, User, LogOut, MessageCircle, Calendar, Settings, Award, Users, ShoppingBag, ChevronDown } from 'lucide-react';
+import { GraduationCap, User, LogOut, MessageCircle, Calendar, Settings, Award, Users, ShoppingBag, ChevronDown, Heart } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import AvatarUpload from '../AvatarUpload';
 
@@ -63,6 +63,13 @@ const Header: React.FC = () => {
                     >
                       <MessageCircle className="h-4 w-4" />
                       <span className="hidden sm:inline">Messages</span>
+                    </Link>
+                    <Link
+                      to="/library"
+                      className="text-gray-700 hover:text-blue-600 transition-colors flex items-center space-x-1"
+                    >
+                      <Heart className="h-4 w-4" />
+                      <span className="hidden sm:inline">Library</span>
                     </Link>
                   </>
                 )}

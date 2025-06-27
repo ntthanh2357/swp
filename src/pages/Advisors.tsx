@@ -264,7 +264,7 @@ const Advisors: React.FC = () => {
                     </span>
                   </div>
                   <Link
-                    to={`/advisor/${advisor.id}`}
+                    to={`/advisors/${advisor.id}`}
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                   >
                     View Profile

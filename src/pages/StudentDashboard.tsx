@@ -11,7 +11,8 @@ import {
   AlertCircle,
   Star,
   ChevronRight,
-  Plus
+  Plus,
+  Heart
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
@@ -355,6 +356,17 @@ const StudentDashboard: React.FC = () => {
                     <span className="text-gray-900 font-medium">Update Profile</span>
                   </div>
                   <ChevronRight className="h-5 w-5 text-gray-600" />
+                </Link>
+
+                <Link 
+                  to="/library"
+                  className="flex items-center justify-between p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
+                >
+                  <div className="flex items-center">
+                    <Heart className="h-5 w-5 text-purple-600 mr-3" />
+                    <span className="text-purple-900 font-medium">My Library</span>
+                  </div>
+                  <ChevronRight className="h-5 w-5 text-purple-600" />
                 </Link>
 
                 <Link 
