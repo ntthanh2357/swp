@@ -22,6 +22,7 @@ import AdvisorDashboard from './pages/AdvisorDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AdvisorScholarships from './pages/AdvisorScholarships';
 import Profile from './pages/Profile';
+import CreateScholarship from './pages/CreateScholarship';
 import Chat from './pages/Chat';
 import Library from './pages/Library';
 import About from './pages/About';
@@ -48,6 +49,7 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/advisor-scholarships" element={<AdvisorScholarships />} />
               <Route path="/advisor-profile-setup" element={<AdvisorProfileSetup />} />
+              <Route path="/create-scholarship" element={<CreateScholarship />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/library" element={<Library />} />
