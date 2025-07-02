@@ -49,34 +49,6 @@ export interface ConsultingPackage {
   features: string[];
 }
 
-export interface Scholarship {
-  id: string;
-  title: string;
-  provider: string;
-  amount: number;
-  currency: string;
-  deadline: Date;
-  country: string;
-  fieldOfStudy: string[];
-  academicLevel: string[];
-  requirements: string[];
-  description: string;
-  applicationUrl: string;
-  tags: string[];
-  featured: boolean;
-  createdAt: Date;
-  isSaved?: boolean;
-  hasApplied?: boolean;
-}
-
-export interface SavedScholarship {
-  id: string;
-  userId: string;
-  scholarshipId: string;
-  savedAt: Date;
-  notes?: string;
-}
-
 export interface ScholarshipApplication {
   id: string;
   userId: string;

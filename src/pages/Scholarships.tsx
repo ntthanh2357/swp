@@ -1,56 +1,29 @@
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Calendar, DollarSign, GraduationCap, Star, Heart, CheckCircle, FileText, Award, Globe, Book, Users, TrendingUp, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { Scholarship } from '../types';
+import { useAuth } from '../contexts/AuthContext'; 
+import { useScholarships } from '../hooks/useScholarships';
+import { ScholarshipFilters } from '../types/scholarship';
 
 const Scholarships: React.FC = () => {
   const { user } = useAuth();
+  const {
+    scholarships,
+    totalScholarships,
+    loading,
+    error,
+    filters,
+    updateFilters,
+    toggleSaveScholarship
+  } = useScholarships();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedField, setSelectedField] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('');
   const [sortBy, setSortBy] = useState('deadline');
   const [currentPage, setCurrentPage] = useState(1);
-  const [savedScholarships, setSavedScholarships] = useState<string[]>(['1', '3']); // Mock saved scholarship IDs
   const itemsPerPage = 12;
 
-  // Mock scholarships data with more entries
-  const scholarships: Scholarship[] = [
-    {
-      id: '1',
-      title: 'Microsoft Scholarship Program',
-      provider: 'Microsoft Corporation',
-      amount: 5000,
-      currency: 'USD',
-      deadline: new Date('2024-03-15'),
-      country: 'USA',
-      fieldOfStudy: ['Computer Science', 'Engineering', 'Technology'],
-      academicLevel: ['Bachelor', 'Master'],
-      requirements: ['GPA 3.0+', 'STEM field', 'Leadership experience', 'Financial need'],
-      description: 'Supporting diversity in technology through education. This comprehensive scholarship program aims to increase representation in STEM fields and provide opportunities for underrepresented students.',
-      applicationUrl: 'https://microsoft.com/scholarships',
-      tags: ['Technology', 'Diversity', 'STEM'],
-      featured: true,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '2',
-      title: 'Google Developer Scholarship',
-      provider: 'Google',
-      amount: 10000,
-      currency: 'USD',
-      deadline: new Date('2024-02-28'),
-      country: 'USA',
-      fieldOfStudy: ['Computer Science', 'Software Engineering', 'Web Development'],
-      academicLevel: ['Bachelor', 'Master', 'PhD'],
-      requirements: ['Programming skills', 'Open source contributions', 'Portfolio projects'],
-      description: 'Supporting the next generation of developers and innovators. Recipients gain access to mentorship, internship opportunities, and Google developer resources.',
-      applicationUrl: 'https://developers.google.com/scholarships',
-      tags: ['Programming', 'Open Source', 'Innovation'],
-      featured: true,
-      createdAt: new Date('2024-01-01'),
-    },
     {
       id: '3',
       title: 'Fulbright Foreign Student Program',
@@ -278,44 +251,35 @@ const Scholarships: React.FC = () => {
   const fields = ['Computer Science', 'Engineering', 'Business', 'Medicine', 'Arts', 'Social Sciences', 'All Fields'];
   const levels = ['Bachelor', 'Master', 'PhD', 'Postdoc'];
 
-  // Filter scholarships
-  const filteredScholarships = scholarships.filter(scholarship => {
-    const matchesSearch = scholarship.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         scholarship.provider.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         scholarship.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCountry = !selectedCountry || scholarship.country.includes(selectedCountry);
-    const matchesField = !selectedField || scholarship.fieldOfStudy.some(field => field.includes(selectedField));
-    const matchesLevel = !selectedLevel || scholarship.academicLevel.includes(selectedLevel);
+  // Apply filters when they change
+  const handleFilterChange = () => {
+    const newFilters: ScholarshipFilters = {
+      search: searchQuery || undefined,
+      country: selectedCountry || undefined,
+      fieldOfStudy: selectedField || undefined,
+      academicLevel: selectedLevel || undefined,
+      sortBy: sortBy as any,
+      page: currentPage,
+      limit: itemsPerPage
+    };
     
-    return matchesSearch && matchesCountry && matchesField && matchesLevel;
-  });
+    updateFilters(newFilters);
+  };
 
-  // Sort scholarships
-  const sortedScholarships = [...filteredScholarships].sort((a, b) => {
-    switch (sortBy) {
-      case 'deadline':
-        return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
-      case 'amount':
-        return b.amount - a.amount;
-      case 'featured':
-        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
-      case 'newest':
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      default:
-        return 0;
-    }
-  });
+  // Apply filters when the search query, filters, or pagination changes
+  React.useEffect(() => {
+    handleFilterChange();
+  }, [searchQuery, selectedCountry, selectedField, selectedLevel, sortBy, currentPage]);
 
-  // Pagination
-  const totalPages = Math.ceil(sortedScholarships.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedScholarships = sortedScholarships.slice(startIndex, startIndex + itemsPerPage);
+  // Calculate total pages
+  const totalPages = Math.ceil(totalScholarships / itemsPerPage);
 
-  const handleSaveScholarship = (scholarshipId: string) => {
-    if (savedScholarships.includes(scholarshipId)) {
-      setSavedScholarships(prev => prev.filter(id => id !== scholarshipId));
-    } else {
-      setSavedScholarships(prev => [...prev, scholarshipId]);
+  // Handle saving/unsaving scholarships
+  const handleSaveScholarship = async (scholarshipId: string) => {
+    try {
+      await toggleSaveScholarship(scholarshipId);
+    } catch (error) {
+      console.error('Error toggling save status:', error);
     }
   };
 
@@ -365,7 +329,7 @@ const Scholarships: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-xl shadow-sm p-6 mb-8"> 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="relative md:col-span-2">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -428,14 +392,45 @@ const Scholarships: React.FC = () => {
             </div>
             
             <div className="text-sm text-gray-600">
-              {filteredScholarships.length} scholarship{filteredScholarships.length !== 1 ? 's' : ''} found
+              {totalScholarships} scholarship{totalScholarships !== 1 ? 's' : ''} found
             </div>
           </div>
         </div>
 
         {/* Results */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-          {paginatedScholarships.map((scholarship) => {
+        {loading ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
+                <div className="h-6 bg-gray-200 rounded mb-4 w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-6 w-1/2"></div>
+                <div className="h-8 bg-gray-200 rounded mb-4 w-1/3"></div>
+                <div className="space-y-2 mb-4">
+                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+                <div className="h-10 bg-gray-200 rounded"></div>
+              </div>
+            ))}
+          </div>
+        ) : error ? (
+          <div className="bg-red-50 border border-red-200 text-red-600 p-6 rounded-lg mb-8">
+            <div className="flex items-center mb-2">
+              <AlertCircle className="h-5 w-5 mr-2" />
+              <h3 className="font-bold">Error loading scholarships</h3>
+            </div>
+            <p>{error}</p>
+            <button 
+              onClick={() => handleFilterChange()}
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {scholarships.map((scholarship) => {
             const daysLeft = getDaysUntilDeadline(scholarship.deadline);
             const isUrgent = daysLeft <= 30 && daysLeft > 0;
             const isExpired = daysLeft <= 0;
@@ -588,8 +583,9 @@ const Scholarships: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"></div>
               </div>
             );
-          })}
-        </div>
+            })}
+          </div>
+        )}
 
         {/* Pagination */}
         {totalPages > 1 && (
@@ -614,7 +610,7 @@ const Scholarships: React.FC = () => {
                       : 'border border-gray-300 hover:bg-gray-50'
                   }`}
                 >
-                  {pageNumber}
+                  {!isExpired && (
                 </button>
               );
             })}
@@ -630,7 +626,7 @@ const Scholarships: React.FC = () => {
         )}
 
         {/* No Results */}
-        {filteredScholarships.length === 0 && (
+        {scholarships.length === 0 && !loading && !error && (
           <div className="text-center py-12">
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Filter className="h-12 w-12 text-gray-400" />
@@ -638,11 +634,18 @@ const Scholarships: React.FC = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-4">No scholarships found</h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">Try adjusting your search criteria to find more scholarships that match your needs.</p>
             <button
-              onClick={() => {
+              onClick={() => { 
                 setSearchQuery('');
                 setSelectedCountry('');
                 setSelectedField('');
                 setSelectedLevel('');
+                updateFilters({
+                  search: undefined,
+                  country: undefined,
+                  fieldOfStudy: undefined,
+                  academicLevel: undefined,
+                  page: 1
+                });
               }}
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
             >

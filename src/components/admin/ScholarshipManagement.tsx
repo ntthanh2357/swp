@@ -15,8 +15,9 @@ import {
   TrendingUp,
   Users
 } from 'lucide-react';
-import { AdminScholarship } from './types';
+import { AdminScholarship } from './types'; 
 import { getStatusColor, formatDate, formatCurrency } from './utils';
+import supabase from '../../services/supabaseClient';
 
 const ScholarshipManagement: React.FC = () => {
   const [scholarships, setScholarships] = useState<AdminScholarship[]>([]);
@@ -31,88 +32,66 @@ const ScholarshipManagement: React.FC = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       setLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock scholarship data
-      const mockScholarships: AdminScholarship[] = [
-        {
-          id: '1',
-          title: 'Microsoft Scholarship Program',
-          provider: 'Microsoft Corporation',
-          amount: 5000,
-          currency: 'USD',
-          deadline: new Date('2024-03-15'),
-          country: 'USA',
-          status: 'active',
-          applications: 127,
-          createdBy: 'admin',
-          createdAt: new Date('2024-01-01'),
-          featured: true
-        },
-        {
-          id: '2',
-          title: 'Google Developer Scholarship',
-          provider: 'Google',
-          amount: 10000,
-          currency: 'USD',
-          deadline: new Date('2024-02-28'),
-          country: 'USA',
-          status: 'active',
-          applications: 89,
-          createdBy: 'advisor-2',
-          createdAt: new Date('2024-01-05'),
-          featured: true
-        },
-        {
-          id: '3',
-          title: 'Fulbright Foreign Student Program',
-          provider: 'U.S. Department of State',
-          amount: 30000,
-          currency: 'USD',
-          deadline: new Date('2024-10-15'),
-          country: 'USA',
-          status: 'active',
-          applications: 234,
-          createdBy: 'admin',
-          createdAt: new Date('2024-01-10'),
-          featured: true
-        },
-        {
-          id: '4',
-          title: 'Rhodes Scholarship',
-          provider: 'Rhodes Trust',
-          amount: 70000,
-          currency: 'GBP',
-          deadline: new Date('2024-09-30'),
-          country: 'UK',
-          status: 'active',
-          applications: 156,
-          createdBy: 'admin',
-          createdAt: new Date('2024-01-12'),
-          featured: true
-        },
-        {
-          id: '5',
-          title: 'Expired Test Scholarship',
-          provider: 'Test Organization',
-          amount: 5000,
-          currency: 'USD',
-          deadline: new Date('2023-12-31'),
-          country: 'USA',
-          status: 'expired',
-          applications: 45,
-          createdBy: 'admin',
-          createdAt: new Date('2023-10-01'),
-          featured: false
+      try {
+        // Fetch scholarships from Supabase
+        let query = supabase
+          .from('scholarships')
+          .select('*');
+
+        // Apply filters if needed
+        if (filterStatus !== 'all') {
+          query = query.eq('status', filterStatus);
         }
-      ];
-      
-      setScholarships(mockScholarships);
-      setLoading(false);
+
+        if (filterCountry !== 'all') {
+          query = query.eq('country', filterCountry);
+        }
+
+        if (searchQuery) {
+          query = query.or(`title.ilike.%${searchQuery}%,provider.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%`);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+          throw new Error(error.message);
+        }
+
+        // Transform data to match AdminScholarship interface
+        const transformedData: AdminScholarship[] = data.map((item: any) => {
+          // Determine status based on deadline
+          let status = 'active';
+          const deadline = new Date(item.deadline);
+          if (deadline < new Date()) {
+            status = 'expired';
+          }
+
+          return {
+            id: item.id,
+            title: item.title,
+            provider: item.provider,
+            amount: item.amount,
+            currency: item.currency,
+            deadline: new Date(item.deadline),
+            country: item.country,
+            status: item.status || status,
+            applications: item.application_count || 0, // This would need a separate query in production
+            createdBy: item.created_by,
+            createdAt: new Date(item.created_at),
+            featured: item.featured
+          };
+        });
+
+        setScholarships(transformedData);
+      } catch (err) {
+        console.error("Error fetching scholarships:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchScholarships();
-  }, []);
+  }, [searchQuery, filterStatus, filterCountry]);
 
   // Filter scholarships
   const filteredScholarships = scholarships.filter(scholarship => {
@@ -132,6 +111,22 @@ const ScholarshipManagement: React.FC = () => {
   const handleScholarshipAction = async (scholarshipId: string, action: 'activate' | 'deactivate' | 'delete') => {
     try {
       console.log(`${action} scholarship ${scholarshipId}`);
+
+      if (action === 'delete') {
+        const { error } = await supabase
+          .from('scholarships')
+          .delete()
+          .eq('id', scholarshipId);
+
+        if (error) throw new Error(error.message);
+      } else {
+        const { error } = await supabase
+          .from('scholarships')
+          .update({ status: action === 'activate' ? 'active' : 'inactive' })
+          .eq('id', scholarshipId);
+
+        if (error) throw new Error(error.message);
+      }
       
       if (action === 'delete') {
         setScholarships(prev => prev.filter(s => s.id !== scholarshipId));

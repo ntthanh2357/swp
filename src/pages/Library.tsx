@@ -17,12 +17,13 @@ import {
   Search
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { Scholarship, Advisor } from '../types';
+import { Advisor } from '../types';
+import { useScholarships } from '../hooks/useScholarships';
 
 const Library: React.FC = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'scholarships' | 'advisors'>('scholarships');
-  const [savedScholarships, setSavedScholarships] = useState<Scholarship[]>([]);
+  const { scholarships: savedScholarships, fetchSavedScholarships, toggleSaveScholarship, loading: scholarshipsLoading } = useScholarships();
   const [savedAdvisors, setSavedAdvisors] = useState<Advisor[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -112,22 +113,25 @@ const Library: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Load saved items from localStorage
-    const savedScholarshipIds = JSON.parse(localStorage.getItem('savedScholarships') || '[]');
-    const savedAdvisorIds = JSON.parse(localStorage.getItem('savedAdvisors') || '[]');
+    // Load saved items
+    if (user && activeTab === 'scholarships') {
+      fetchSavedScholarships();
+    }
 
-    const scholarships = allScholarships.filter(s => savedScholarshipIds.includes(s.id));
-    const advisors = allAdvisors.filter(a => savedAdvisorIds.includes(a.id));
+    // Load saved advisors (still using mock data)
+    if (user && activeTab === 'advisors') {
+      const savedAdvisorIds = JSON.parse(localStorage.getItem('savedAdvisors') || '[]');
+      const advisors = allAdvisors.filter(a => savedAdvisorIds.includes(a.id));
+      setSavedAdvisors(advisors);
+    }
+  }, [user, activeTab]);
 
-    setSavedScholarships(scholarships);
-    setSavedAdvisors(advisors);
-  }, []);
-
-  const handleRemoveScholarship = (scholarshipId: string) => {
-    const savedScholarshipIds = JSON.parse(localStorage.getItem('savedScholarships') || '[]');
-    const updated = savedScholarshipIds.filter((id: string) => id !== scholarshipId);
-    localStorage.setItem('savedScholarships', JSON.stringify(updated));
-    setSavedScholarships(prev => prev.filter(s => s.id !== scholarshipId));
+  const handleRemoveScholarship = async (scholarshipId: string) => {
+    try {
+      await toggleSaveScholarship(scholarshipId);
+    } catch (error) {
+      console.error('Error removing scholarship:', error);
+    }
   };
 
   const handleRemoveAdvisor = (advisorId: string) => {
@@ -137,7 +141,7 @@ const Library: React.FC = () => {
     setSavedAdvisors(prev => prev.filter(a => a.id !== advisorId));
   };
 
-  const filteredScholarships = savedScholarships.filter(scholarship =>
+  const filteredScholarships = savedScholarships?.filter(scholarship =>
     scholarship.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     scholarship.provider.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -235,20 +239,35 @@ const Library: React.FC = () => {
 
         {/* Content */}
         {activeTab === 'scholarships' ? (
-          <div>
-            {filteredScholarships.length === 0 ? (
+          <div> 
+            {scholarshipsLoading ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(3)].map((_, index) => (
+                  <div key={index} className="bg-white rounded-xl shadow-sm p-6 animate-pulse">
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+                    <div className="space-y-2 mb-6">
+                      <div className="h-4 bg-gray-200 rounded w-full"></div>
+                      <div className="h-4 bg-gray-200 rounded w-full"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                    <div className="h-10 bg-gray-200 rounded"></div>
+                  </div>
+                ))}
+              </div>
+            ) : filteredScholarships?.length === 0 ? (
               <div className="bg-white rounded-xl shadow-sm p-12 text-center">
                 <Award className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   {savedScholarships.length === 0 ? 'No saved scholarships yet' : 'No scholarships match your search'}
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  {savedScholarships.length === 0 
+                  {savedScholarships?.length === 0 
                     ? 'Start exploring scholarships and save the ones you\'re interested in.'
                     : 'Try adjusting your search terms.'
                   }
                 </p>
-                {savedScholarships.length === 0 && (
+                {savedScholarships?.length === 0 && (
                   <Link
                     to="/scholarships"
                     className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"

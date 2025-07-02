@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { AdminScholarship, RouteParams } from './types';
 import { validateId, formatDate, formatCurrency, getStatusColor } from './utils';
+import supabase from '../../services/supabaseClient';
 
 const ScholarshipDetail: React.FC = () => {
   const { id } = useParams<RouteParams>();
@@ -36,48 +37,52 @@ const ScholarshipDetail: React.FC = () => {
     const fetchScholarship = async () => {
       try {
         setLoading(true);
-        
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Mock scholarship data
-        const mockScholarships: { [key: string]: AdminScholarship } = {
-          '1': {
-            id: '1',
-            title: 'Microsoft Scholarship Program',
-            provider: 'Microsoft Corporation',
-            amount: 5000,
-            currency: 'USD',
-            deadline: new Date('2024-03-15'),
-            country: 'USA',
-            status: 'active',
-            applications: 127,
-            createdBy: 'admin',
-            createdAt: new Date('2024-01-01'),
-            featured: true
-          },
-          '2': {
-            id: '2',
-            title: 'Google Developer Scholarship',
-            provider: 'Google',
-            amount: 10000,
-            currency: 'USD',
-            deadline: new Date('2024-02-28'),
-            country: 'USA',
-            status: 'active',
-            applications: 89,
-            createdBy: 'advisor-2',
-            createdAt: new Date('2024-01-05'),
-            featured: true
-          }
-        };
 
-        const foundScholarship = mockScholarships[id!];
-        if (!foundScholarship) {
-          setError('Scholarship not found');
-        } else {
-          setScholarship(foundScholarship);
+        // Fetch scholarship from Supabase
+        const { data, error } = await supabase
+          .from('scholarships')
+          .select('*')
+          .eq('id', id)
+          .single();
+
+        if (error) {
+          throw new Error(error.message);
         }
+
+        if (!data) {
+          setError('Scholarship not found');
+          return;
+        }
+
+        // Fetch application count
+        const { count } = await supabase
+          .from('saved_scholarships')
+          .select('id', { count: 'exact' })
+          .eq('scholarship_id', id);
+        
+        // Determine status based on deadline
+        let status = data.status || 'active';
+        if (new Date(data.deadline) < new Date() && status === 'active') {
+          status = 'expired';
+        }
+
+        // Transform data to match AdminScholarship interface
+        const scholarship: AdminScholarship = {
+          id: data.id,
+          title: data.title,
+          provider: data.provider,
+          amount: data.amount,
+          currency: data.currency,
+          deadline: new Date(data.deadline),
+          country: data.country,
+          status: status,
+          applications: count || 0,
+          createdBy: data.created_by,
+          createdAt: new Date(data.created_at),
+          featured: data.featured
+        };
+        
+        setScholarship(scholarship);
       } catch (err) {
         setError('Failed to fetch scholarship details');
       } finally {
@@ -93,6 +98,15 @@ const ScholarshipDetail: React.FC = () => {
 
     try {
       console.log(`Changing scholarship ${scholarship.id} status to ${newStatus}`);
+      
+      // Update scholarship status in Supabase
+      const { error } = await supabase
+        .from('scholarships')
+        .update({ status: newStatus })
+        .eq('id', scholarship.id);
+
+      if (error) throw new Error(error.message);
+      
       setScholarship({ ...scholarship, status: newStatus as any });
     } catch (error) {
       console.error('Error updating scholarship status:', error);
