@@ -1,8 +1,5 @@
-Here's the fixed version with added missing brackets and parentheses:
-
-```javascript
 import React, { useState } from 'react';
-import { Search, Filter, MapPin, Calendar, DollarSign, GraduationCap, Star, Heart, CheckCircle, FileText, Award, Globe, Book, Users, TrendingUp, ExternalLink } from 'lucide-react';
+import { Search, Filter, MapPin, Calendar, DollarSign, GraduationCap, Star, Heart, CheckCircle, FileText, Award, Globe, Book, Users, TrendingUp, ExternalLink, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext'; 
 import { useScholarships } from '../hooks/useScholarships';
@@ -17,7 +14,8 @@ const Scholarships: React.FC = () => {
     error,
     filters,
     updateFilters,
-    toggleSaveScholarship
+    toggleSaveScholarship,
+    savedScholarships
   } = useScholarships();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -26,230 +24,6 @@ const Scholarships: React.FC = () => {
   const [sortBy, setSortBy] = useState('deadline');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-
-  const mockScholarships = [
-    {
-      id: '3',
-      title: 'Fulbright Foreign Student Program',
-      provider: 'U.S. Department of State',
-      amount: 30000,
-      currency: 'USD',
-      deadline: new Date('2024-10-15'),
-      country: 'USA',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Master', 'PhD'],
-      requirements: ['International student', 'Academic excellence', 'Leadership potential', 'English proficiency'],
-      description: 'The flagship international educational exchange program sponsored by the U.S. government. Provides funding for graduate study, research, and teaching.',
-      applicationUrl: 'https://fulbrightprogram.org',
-      tags: ['International', 'Government', 'Exchange'],
-      featured: true,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '4',
-      title: 'Rhodes Scholarship',
-      provider: 'Rhodes Trust',
-      amount: 70000,
-      currency: 'GBP',
-      deadline: new Date('2024-09-30'),
-      country: 'UK',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Master', 'PhD'],
-      requirements: ['Academic excellence', 'Leadership', 'Service to others', 'Age 18-24'],
-      description: 'The world\'s oldest international scholarship program. Study at the University of Oxford with full funding for 2-3 years.',
-      applicationUrl: 'https://rhodeshouse.ox.ac.uk',
-      tags: ['Prestigious', 'Oxford', 'International'],
-      featured: true,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '5',
-      title: 'Chevening Scholarships',
-      provider: 'UK Government',
-      amount: 25000,
-      currency: 'GBP',
-      deadline: new Date('2024-11-01'),
-      country: 'UK',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Master'],
-      requirements: ['Work experience', 'Leadership potential', 'English proficiency', 'Return to home country'],
-      description: 'UK government\'s global scholarship program. Study any eligible master\'s degree at a UK university with full funding.',
-      applicationUrl: 'https://chevening.org',
-      tags: ['Government', 'Leadership', 'UK'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '6',
-      title: 'DAAD Scholarships',
-      provider: 'German Academic Exchange Service',
-      amount: 15000,
-      currency: 'EUR',
-      deadline: new Date('2024-08-31'),
-      country: 'Germany',
-      fieldOfStudy: ['Engineering', 'Science', 'Arts', 'Social Sciences'],
-      academicLevel: ['Bachelor', 'Master', 'PhD'],
-      requirements: ['Academic merit', 'German language (some programs)', 'Motivation letter'],
-      description: 'Study in Germany with comprehensive support including tuition, living expenses, and travel costs.',
-      applicationUrl: 'https://daad.de',
-      tags: ['Germany', 'Research', 'Language'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '7',
-      title: 'Australia Awards Scholarships',
-      provider: 'Australian Government',
-      amount: 40000,
-      currency: 'AUD',
-      deadline: new Date('2024-05-30'),
-      country: 'Australia',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Bachelor', 'Master'],
-      requirements: ['Developing country citizen', 'Return commitment', 'Leadership potential'],
-      description: 'Long-term development scholarships contributing to development needs of Australia\'s partner countries.',
-      applicationUrl: 'https://australiaawards.gov.au',
-      tags: ['Development', 'Partnership', 'Government'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '8',
-      title: 'Japanese Government MEXT Scholarship',
-      provider: 'Ministry of Education, Culture, Sports, Science and Technology',
-      amount: 20000,
-      currency: 'JPY',
-      deadline: new Date('2024-06-15'),
-      country: 'Japan',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Bachelor', 'Master', 'PhD'],
-      requirements: ['Academic excellence', 'Japanese language study', 'Age requirements'],
-      description: 'Study in Japan with full tuition coverage, monthly allowance, and travel expenses.',
-      applicationUrl: 'https://mext.go.jp',
-      tags: ['Government', 'Culture', 'Language'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '9',
-      title: 'Swiss Government Excellence Scholarships',
-      provider: 'Swiss Confederation',
-      amount: 35000,
-      currency: 'CHF',
-      deadline: new Date('2024-12-01'),
-      country: 'Switzerland',
-      fieldOfStudy: ['Research', 'Arts', 'Music'],
-      academicLevel: ['Master', 'PhD', 'Postdoc'],
-      requirements: ['Academic merit', 'Research proposal', 'Language requirements'],
-      description: 'Promote international exchange and research cooperation between Switzerland and over 180 other countries.',
-      applicationUrl: 'https://swissgov.scholarship.ch',
-      tags: ['Research', 'Excellence', 'International'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '10',
-      title: 'Gates Cambridge Scholarship',
-      provider: 'Bill & Melinda Gates Foundation',
-      amount: 50000,
-      currency: 'GBP',
-      deadline: new Date('2024-12-15'),
-      country: 'UK',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Master', 'PhD'],
-      requirements: ['Outstanding academic achievement', 'Leadership potential', 'Commitment to improving lives'],
-      description: 'Highly competitive scholarship for outstanding applicants from countries outside the UK to pursue a graduate degree at Cambridge.',
-      applicationUrl: 'https://gatescambridge.org',
-      tags: ['Prestigious', 'Cambridge', 'Leadership'],
-      featured: true,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '11',
-      title: 'Eiffel Excellence Scholarship',
-      provider: 'Campus France',
-      amount: 25000,
-      currency: 'EUR',
-      deadline: new Date('2024-01-08'),
-      country: 'France',
-      fieldOfStudy: ['Engineering', 'Economics', 'Management', 'Political Science', 'Law'],
-      academicLevel: ['Master', 'PhD'],
-      requirements: ['International student', 'Academic excellence', 'Age under 30 (Master), 35 (PhD)'],
-      description: 'French government scholarship program to attract top international students to French higher education.',
-      applicationUrl: 'https://campusfrance.org',
-      tags: ['Government', 'Excellence', 'International'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '12',
-      title: 'Chinese Government Scholarship',
-      provider: 'China Scholarship Council',
-      amount: 18000,
-      currency: 'CNY',
-      deadline: new Date('2024-04-30'),
-      country: 'China',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Bachelor', 'Master', 'PhD'],
-      requirements: ['International student', 'Academic merit', 'Age requirements', 'Health certificate'],
-      description: 'Comprehensive scholarship covering tuition, accommodation, living allowance, and medical insurance.',
-      applicationUrl: 'https://csc.edu.cn',
-      tags: ['Government', 'Comprehensive', 'Culture'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '13',
-      title: 'Erasmus Mundus Joint Master Degrees',
-      provider: 'European Commission',
-      amount: 24000,
-      currency: 'EUR',
-      deadline: new Date('2024-01-15'),
-      country: 'Multiple EU Countries',
-      fieldOfStudy: ['Various Fields'],
-      academicLevel: ['Master'],
-      requirements: ['Bachelor degree', 'Language requirements', 'Academic excellence'],
-      description: 'Study in multiple European countries with full scholarship covering tuition, travel, and living costs.',
-      applicationUrl: 'https://erasmusplus.eu',
-      tags: ['European', 'Mobility', 'Multicultural'],
-      featured: true,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '14',
-      title: 'Canada Graduate Scholarships',
-      provider: 'Government of Canada',
-      amount: 35000,
-      currency: 'CAD',
-      deadline: new Date('2024-10-01'),
-      country: 'Canada',
-      fieldOfStudy: ['All Fields'],
-      academicLevel: ['Master', 'PhD'],
-      requirements: ['Academic excellence', 'Research potential', 'Canadian resident or international'],
-      description: 'Support high-caliber students engaged in master\'s or doctoral programs in Canada.',
-      applicationUrl: 'https://nserc-crsng.gc.ca',
-      tags: ['Government', 'Research', 'Graduate'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '15',
-      title: 'New Zealand Development Scholarships',
-      provider: 'New Zealand Government',
-      amount: 30000,
-      currency: 'NZD',
-      deadline: new Date('2024-07-31'),
-      country: 'New Zealand',
-      fieldOfStudy: ['Development-related fields'],
-      academicLevel: ['Bachelor', 'Master'],
-      requirements: ['Developing country citizen', 'Development focus', 'Return commitment'],
-      description: 'Contribute to sustainable development in partner countries through tertiary education and training.',
-      applicationUrl: 'https://nzscholarships.govt.nz',
-      tags: ['Development', 'Sustainability', 'Partnership'],
-      featured: false,
-      createdAt: new Date('2024-01-01'),
-    }
-  ];
 
   const countries = ['USA', 'UK', 'Germany', 'Australia', 'Canada', 'France', 'Japan', 'Switzerland', 'China', 'New Zealand'];
   const fields = ['Computer Science', 'Engineering', 'Business', 'Medicine', 'Arts', 'Social Sciences', 'All Fields'];
@@ -644,3 +418,19 @@ const Scholarships: React.FC = () => {
                 setSelectedField('');
                 setSelectedLevel('');
                 updateFilters({
+                  page: 1,
+                  limit: itemsPerPage
+                });
+              }}
+              className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold"
+            >
+              Clear All Filters
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Scholarships;

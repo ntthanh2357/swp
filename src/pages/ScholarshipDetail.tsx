@@ -1,5 +1,3 @@
-The file appears to have some duplicate code blocks and is missing some closing brackets. Here's the corrected version with the duplicates removed and proper closing brackets added:
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
