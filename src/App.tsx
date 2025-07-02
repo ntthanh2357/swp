@@ -26,6 +26,7 @@ import AdvisorScholarships from './pages/AdvisorScholarships';
 import Profile from './pages/Profile';
 import Chat from './pages/Chat';
 import Library from './pages/Library';
+import About from './pages/About';
 
 function App() {
   return (
