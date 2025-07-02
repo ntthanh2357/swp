@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { AdminLayout, Overview, UserManagement, UserDetail, ScholarshipManagement, ScholarshipDetail, Settings } from './components/admin';
 
 // Layout Components
 import Header from './components/Layout/Header';
@@ -25,7 +26,6 @@ import AdvisorScholarships from './pages/AdvisorScholarships';
 import Profile from './pages/Profile';
 import Chat from './pages/Chat';
 import Library from './pages/Library';
-import About from './pages/About';
 
 function App() {
   return (
@@ -46,7 +46,15 @@ function App() {
               <Route path="/orders" element={<OrderHistory />} />
               <Route path="/dashboard" element={<StudentDashboard />} />
               <Route path="/advisor-dashboard" element={<AdvisorDashboard />} />
-              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<Overview />} />
+                <Route path="overview" element={<Overview />} />
+                <Route path="users" element={<UserManagement />} />
+                <Route path="users/:id" element={<UserDetail />} />
+                <Route path="scholarships" element={<ScholarshipManagement />} />
+                <Route path="scholarships/:id" element={<ScholarshipDetail />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
               <Route path="/advisor-scholarships" element={<AdvisorScholarships />} />
               <Route path="/advisor-profile-setup" element={<AdvisorProfileSetup />} />
               <Route path="/create-scholarship" element={<CreateScholarship />} />
