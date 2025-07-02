@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import { AdminLayout, Overview, UserManagement, UserDetail, ScholarshipManagement, ScholarshipDetail, Settings } from './components/admin';
+import { AdminLayout, Overview, UserManagement, UserDetail, ScholarshipManagement, ScholarshipDetail as AdminScholarshipDetail, Settings } from './components/admin';
 
 // Layout Components
 import Header from './components/Layout/Header';
@@ -52,7 +52,7 @@ function App() {
                 <Route path="users" element={<UserManagement />} />
                 <Route path="users/:id" element={<UserDetail />} />
                 <Route path="scholarships" element={<ScholarshipManagement />} />
-                <Route path="scholarships/:id" element={<ScholarshipDetail />} />
+                <Route path="scholarships/:id" element={<AdminScholarshipDetail />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="/advisor-scholarships" element={<AdvisorScholarships />} />
