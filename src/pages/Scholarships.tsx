@@ -1,3 +1,6 @@
+Here's the fixed version with added missing brackets and parentheses:
+
+```javascript
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Calendar, DollarSign, GraduationCap, Star, Heart, CheckCircle, FileText, Award, Globe, Book, Users, TrendingUp, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -24,6 +27,7 @@ const Scholarships: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
+  const mockScholarships = [
     {
       id: '3',
       title: 'Fulbright Foreign Student Program',
@@ -610,7 +614,7 @@ const Scholarships: React.FC = () => {
                       : 'border border-gray-300 hover:bg-gray-50'
                   }`}
                 >
-                  {!isExpired && (
+                  {pageNumber}
                 </button>
               );
             })}
@@ -640,22 +644,3 @@ const Scholarships: React.FC = () => {
                 setSelectedField('');
                 setSelectedLevel('');
                 updateFilters({
-                  search: undefined,
-                  country: undefined,
-                  fieldOfStudy: undefined,
-                  academicLevel: undefined,
-                  page: 1
-                });
-              }}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Clear All Filters
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default Scholarships;
